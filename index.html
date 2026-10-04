@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D4lj337 · Portfolio</title>
+    <meta
+      name="description"
+      content="Minimal developer portfolio for D4lj337 with selected work, capabilities, and contact links."
+    />
+    <meta property="og:title" content="D4lj337 · Portfolio" />
+    <meta
+      property="og:description"
+      content="A minimal, dark-mode friendly personal portfolio site."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://d4lj337.github.io/" />
+    <meta name="theme-color" content="#0b1020" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1020'/%3E%3Ctext x='50%25' y='53%25' dominant-baseline='middle' text-anchor='middle' font-size='30' font-family='Inter,sans-serif' fill='%23a7f3d0'%3ED%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --bg: #050812;
+        --bg-elev: rgba(20, 27, 45, 0.75);
+        --text: #ecf2ff;
+        --muted: #a4b3cf;
+        --line: rgba(168, 186, 219, 0.24);
+        --primary: #73e5bf;
+        --primary-strong: #4dd2a7;
+        --shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
+      }
+
+      :root[data-theme='light'] {
+        --bg: #f5f8ff;
+        --bg-elev: rgba(255, 255, 255, 0.88);
+        --text: #101a32;
+        --muted: #41516f;
+        --line: rgba(79, 100, 142, 0.24);
+        --primary: #1565d8;
+        --primary-strong: #0f54b8;
+        --shadow: 0 10px 28px rgba(20, 34, 64, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        font-family: Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        min-height: 100vh;
+        line-height: 1.65;
+        background-image:
+          radial-gradient(circle at 20% -15%, rgba(115, 229, 191, 0.25), transparent 45%),
+          radial-gradient(circle at 95% 15%, rgba(97, 143, 255, 0.2), transparent 38%),
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size:
+          auto,
+          auto,
+          32px 32px,
+          32px 32px;
+        background-position:
+          center,
+          center,
+          center,
+          center;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+        background: var(--primary);
+        color: #05111f;
+        padding: 0.6rem 0.9rem;
+        border-radius: 0.4rem;
+      }
+
+      .skip-link:focus-visible {
+        left: 1rem;
+        top: 1rem;
+        z-index: 1000;
+      }
+
+      .container {
+        width: min(1024px, 92vw);
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(14px);
+        background: color-mix(in oklab, var(--bg) 76%, transparent);
+        border-bottom: 1px solid var(--line);
+        z-index: 20;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.8rem 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .brand-mark {
+        width: 2rem;
+        height: 2rem;
+        display: grid;
+        place-items: center;
+        border-radius: 0.6rem;
+        border: 1px solid var(--line);
+        background: var(--bg-elev);
+      }
+
+      nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      nav a:hover,
+      nav a:focus-visible {
+        color: var(--text);
+      }
+
+      .theme-toggle {
+        border: 1px solid var(--line);
+        background: var(--bg-elev);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 0.45rem 0.85rem;
+        font: inherit;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+
+      :focus-visible {
+        outline: 3px solid color-mix(in oklab, var(--primary), white 30%);
+        outline-offset: 3px;
+      }
+
+      main {
+        padding: 3.5rem 0 4rem;
+      }
+
+      section + section {
+        margin-top: 4.5rem;
+      }
+
+      .hero {
+        display: grid;
+        gap: 1.6rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        width: fit-content;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.28rem 0.8rem;
+        color: var(--muted);
+        background: var(--bg-elev);
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        max-width: 16ch;
+      }
+
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.7rem;
+        border: 1px solid transparent;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.68rem 1rem;
+        min-height: 2.8rem;
+      }
+
+      .button.primary {
+        color: #07101d;
+        background: linear-gradient(120deg, var(--primary), var(--primary-strong));
+      }
+
+      .button.secondary {
+        border-color: var(--line);
+        background: var(--bg-elev);
+      }
+
+      .card-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        padding: 1.1rem;
+        background: var(--bg-elev);
+        box-shadow: var(--shadow);
+      }
+
+      .card p,
+      .contact p {
+        margin: 0.5rem 0 0;
+        color: var(--muted);
+      }
+
+      .project-list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .project {
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        padding: 1.2rem;
+        background: var(--bg-elev);
+      }
+
+      .project p {
+        margin: 0.4rem 0 0;
+        color: var(--muted);
+      }
+
+      .contact {
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--bg-elev);
+        padding: 1.3rem;
+      }
+
+      .socials {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 1rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        padding: 1.4rem 0 2rem;
+      }
+
+      @media (max-width: 640px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        nav ul {
+          gap: 0.8rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem('theme-preference');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.dataset.theme = savedTheme;
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header>
+      <div class="container topbar">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>D4lj337</span>
+        </a>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Selected Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-live="polite">
+          Switch theme
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" class="container">
+      <section id="home" class="hero" aria-labelledby="hero-title">
+        <span class="badge">Open to build meaningful products</span>
+        <h1 id="hero-title">Developer portfolio with a clean focus on craft and clarity.</h1>
+        <p class="lead">
+          Hi, I’m <strong>D4lj337</strong>. This page is intentionally minimal and easy to customize.
+          Replace this intro with your personal mission, specialties, and the kind of work you enjoy.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">View selected work</a>
+          <a class="button secondary" href="#contact">Get in touch</a>
+        </div>
+      </section>
+
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">Capabilities</h2>
+        <p class="lead">
+          Briefly list what you do best. Keep these examples or swap in your own stack and strengths.
+        </p>
+        <div class="card-grid" role="list">
+          <article class="card" role="listitem">
+            <h3>Product-minded engineering</h3>
+            <p>Turn ideas into stable, maintainable experiences with clear trade-off decisions.</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>Frontend craftsmanship</h3>
+            <p>Build fast, accessible interfaces with thoughtful interaction details and polish.</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>Platform and automation</h3>
+            <p>Improve delivery with practical CI workflows, quality checks, and observability.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="work" aria-labelledby="work-title">
+        <h2 id="work-title">Selected Work</h2>
+        <p class="lead">Replace placeholders below with your real projects and links.</p>
+        <div class="project-list">
+          <article class="project">
+            <h3>Project Placeholder One</h3>
+            <p>
+              One-line summary of the problem solved, your role, and impact. Add repository/demo links.
+            </p>
+          </article>
+          <article class="project">
+            <h3>Project Placeholder Two</h3>
+            <p>
+              Add key technologies, a notable challenge, and what improved for users or teams.
+            </p>
+          </article>
+          <article class="project">
+            <h3>Project Placeholder Three</h3>
+            <p>
+              Include any metrics only if you can verify them. Keep claims accurate and concise.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-title">
+        <div class="contact">
+          <h2 id="contact-title">Contact &amp; Links</h2>
+          <p>
+            Add your preferred contact methods. Replace placeholder URLs below with your actual profiles.
+          </p>
+          <div class="socials" aria-label="Social links">
+            <a class="button secondary" href="https://github.com/D4lj337">GitHub</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/your-handle">LinkedIn (replace)</a>
+            <a class="button secondary" href="mailto:you@example.com">Email (replace)</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <small>© <span id="year"></span> D4lj337 · Built for GitHub Pages</small>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const storageKey = 'theme-preference';
+        const root = document.documentElement;
+        const toggle = document.getElementById('theme-toggle');
+
+        const currentTheme = () => root.dataset.theme === 'light' ? 'light' : 'dark';
+        const applyTheme = (theme) => {
+          root.dataset.theme = theme;
+          toggle.textContent = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+        };
+
+        applyTheme(currentTheme());
+
+        toggle.addEventListener('click', () => {
+          const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+          localStorage.setItem(storageKey, nextTheme);
+          applyTheme(nextTheme);
+        });
+
+        const media = window.matchMedia('(prefers-color-scheme: light)');
+        media.addEventListener('change', (event) => {
+          if (localStorage.getItem(storageKey)) return;
+          applyTheme(event.matches ? 'light' : 'dark');
+        });
+
+        document.getElementById('year').textContent = String(new Date().getFullYear());
+      })();
+    </script>
+  </body>
+</html>
